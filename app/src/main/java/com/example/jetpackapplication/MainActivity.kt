@@ -24,22 +24,18 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, MainViewModelFactory(countReserved)).get(MainViewModel::class.java)
 
-        refreshCounter()
-
-        binding.plusOneButton.setOnClickListener {
-            viewModel.counter++
-            refreshCounter()
+        viewModel.counter.observe(this) { count ->
+            binding.infoTextView.text=count.toString()
         }
-    }
-
-    fun refreshCounter(){
-        binding.infoTextView.text=viewModel.counter.toString()
+        binding.plusOneButton.setOnClickListener {
+            viewModel.plusOne()
+        }
     }
 
     override fun onPause() {
         super.onPause()
         sp.edit {
-            putInt("COUNTER", viewModel.counter)
+            putInt("COUNTER", viewModel.counter.value ?: 0)
         }
     }
 
