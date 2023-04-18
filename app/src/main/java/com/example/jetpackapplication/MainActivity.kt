@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        lifecycle.addObserver(MyObserver())
+
         sp = getPreferences(MODE_PRIVATE)
         val countReserved = sp.getInt("COUNTER", 0)
 
