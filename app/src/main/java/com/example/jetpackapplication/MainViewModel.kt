@@ -2,9 +2,16 @@ package com.example.jetpackapplication
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 
 class MainViewModel(countReserved: Int) : ViewModel() {
+
+    private val userLiveData = MutableLiveData<User>()
+    val userName: LiveData<String> = Transformations.map(userLiveData)
+    { user ->
+        "${user.firstName} ${user.lastName}"
+    }
 
     val counter : LiveData<Int>
         get() = _counter
@@ -13,6 +20,7 @@ class MainViewModel(countReserved: Int) : ViewModel() {
 
     init {
         _counter.value = countReserved
+        userLiveData.value = User("John", "Doe", 18)
     }
 
     fun plusOne() {

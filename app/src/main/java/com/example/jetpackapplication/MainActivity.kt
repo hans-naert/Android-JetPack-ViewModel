@@ -27,8 +27,13 @@ class MainActivity : AppCompatActivity() {
         viewModel.counter.observe(this) { count ->
             binding.infoTextView.text=count.toString()
         }
+
         binding.plusOneButton.setOnClickListener {
             viewModel.plusOne()
+        }
+
+       viewModel.userName.observe(this){
+              binding.infoTextView.text=it
         }
     }
 

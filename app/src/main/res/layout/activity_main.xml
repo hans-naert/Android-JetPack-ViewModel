@@ -20,4 +20,10 @@
         android:layout_height="wrap_content"
         android:text="plus one" />
 
+    <Button
+        android:id="@+id/getUserButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="get user" />
+
 </LinearLayout>
